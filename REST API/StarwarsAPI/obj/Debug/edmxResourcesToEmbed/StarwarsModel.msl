@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StarwarsModelStoreContainer" CdmEntityContainer="StarwarsDBContext">
+    <EntitySetMapping Name="films">
+      <EntityTypeMapping TypeName="StarwarsModel.film">
+        <MappingFragment StoreEntitySet="films">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="director" ColumnName="director" />
+          <ScalarProperty Name="edited" ColumnName="edited" />
+          <ScalarProperty Name="episode_id" ColumnName="episode_id" />
+          <ScalarProperty Name="opening_crawl" ColumnName="opening_crawl" />
+          <ScalarProperty Name="producer" ColumnName="producer" />
+          <ScalarProperty Name="release_date" ColumnName="release_date" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="people">
+      <EntityTypeMapping TypeName="StarwarsModel.person">
+        <MappingFragment StoreEntitySet="people">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="birth_year" ColumnName="birth_year" />
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="edited" ColumnName="edited" />
+          <ScalarProperty Name="eye_color" ColumnName="eye_color" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="hair_color" ColumnName="hair_color" />
+          <ScalarProperty Name="height" ColumnName="height" />
+          <ScalarProperty Name="homeworld" ColumnName="homeworld" />
+          <ScalarProperty Name="mass" ColumnName="mass" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="skin_color" ColumnName="skin_color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="planets">
+      <EntityTypeMapping TypeName="StarwarsModel.planet">
+        <MappingFragment StoreEntitySet="planets">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="climate" ColumnName="climate" />
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="diameter" ColumnName="diameter" />
+          <ScalarProperty Name="edited" ColumnName="edited" />
+          <ScalarProperty Name="gravity" ColumnName="gravity" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="orbital_period" ColumnName="orbital_period" />
+          <ScalarProperty Name="population" ColumnName="population" />
+          <ScalarProperty Name="rotation_period" ColumnName="rotation_period" />
+          <ScalarProperty Name="surface_water" ColumnName="surface_water" />
+          <ScalarProperty Name="terrain" ColumnName="terrain" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="species">
+      <EntityTypeMapping TypeName="StarwarsModel.species">
+        <MappingFragment StoreEntitySet="species">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="average_height" ColumnName="average_height" />
+          <ScalarProperty Name="average_lifespan" ColumnName="average_lifespan" />
+          <ScalarProperty Name="classification" ColumnName="classification" />
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="edited" ColumnName="edited" />
+          <ScalarProperty Name="eye_colors" ColumnName="eye_colors" />
+          <ScalarProperty Name="hair_colors" ColumnName="hair_colors" />
+          <ScalarProperty Name="homeworld" ColumnName="homeworld" />
+          <ScalarProperty Name="language" ColumnName="language" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="skin_colors" ColumnName="skin_colors" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="starships">
+      <EntityTypeMapping TypeName="StarwarsModel.starship">
+        <MappingFragment StoreEntitySet="starships">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="MGLT" ColumnName="MGLT" />
+          <ScalarProperty Name="hyperdrive_rating" ColumnName="hyperdrive_rating" />
+          <ScalarProperty Name="starship_class" ColumnName="starship_class" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vehicles">
+      <EntityTypeMapping TypeName="StarwarsModel.vehicle">
+        <MappingFragment StoreEntitySet="vehicles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="vehicle_class" ColumnName="vehicle_class" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="films_characters" TypeName="StarwarsModel.films_characters" StoreEntitySet="films_characters">
+      <EndProperty Name="films">
+        <ScalarProperty Name="id" ColumnName="film_id" />
+      </EndProperty>
+      <EndProperty Name="people">
+        <ScalarProperty Name="id" ColumnName="people_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="films_planets" TypeName="StarwarsModel.films_planets" StoreEntitySet="films_planets">
+      <EndProperty Name="films">
+        <ScalarProperty Name="id" ColumnName="film_id" />
+      </EndProperty>
+      <EndProperty Name="planets">
+        <ScalarProperty Name="id" ColumnName="planet_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="films_species" TypeName="StarwarsModel.films_species" StoreEntitySet="films_species">
+      <EndProperty Name="films">
+        <ScalarProperty Name="id" ColumnName="film_id" />
+      </EndProperty>
+      <EndProperty Name="species">
+        <ScalarProperty Name="id" ColumnName="species_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="films_vehicles" TypeName="StarwarsModel.films_vehicles" StoreEntitySet="films_vehicles">
+      <EndProperty Name="films">
+        <ScalarProperty Name="id" ColumnName="film_id" />
+      </EndProperty>
+      <EndProperty Name="vehicles">
+        <ScalarProperty Name="id" ColumnName="vehicle_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="species_people" TypeName="StarwarsModel.species_people" StoreEntitySet="species_people">
+      <EndProperty Name="species">
+        <ScalarProperty Name="id" ColumnName="species_id" />
+      </EndProperty>
+      <EndProperty Name="people">
+        <ScalarProperty Name="id" ColumnName="people_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="starships_pilots" TypeName="StarwarsModel.starships_pilots" StoreEntitySet="starships_pilots">
+      <EndProperty Name="starships">
+        <ScalarProperty Name="id" ColumnName="starship_id" />
+      </EndProperty>
+      <EndProperty Name="people">
+        <ScalarProperty Name="id" ColumnName="people_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="vehicles_pilots" TypeName="StarwarsModel.vehicles_pilots" StoreEntitySet="vehicles_pilots">
+      <EndProperty Name="vehicles">
+        <ScalarProperty Name="id" ColumnName="vehicle_id" />
+      </EndProperty>
+      <EndProperty Name="people">
+        <ScalarProperty Name="id" ColumnName="people_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
