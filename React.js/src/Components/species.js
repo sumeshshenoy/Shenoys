@@ -24,7 +24,7 @@ class Species extends Component {
           {this.state.species.map(species => (
             <div>
               <ul>
-                <li className="ans">
+                <li key={species} className="ans">
                   <b>{species}</b>
                 </li>
               </ul>
