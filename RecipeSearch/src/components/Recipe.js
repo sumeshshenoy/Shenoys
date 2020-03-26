@@ -15,6 +15,15 @@ class Recipe extends Component {
       activeRecipe: resp.ingredients
     });
   };
+  renderRecipeItems(){
+return(
+    <ul>
+    {this.state.activeRecipe.map(ingrediant => 
+        <li key={ingrediant.name}>{ingrediant.name} - {ingrediant.amount.metric.value}  {ingrediant.amount.metric.unit} </li>
+    )}
+    </ul>
+)
+  }
   render() {
     const imageURL = this.props.location.state.imgUrl;
     const recipeTitle = this.props.location.state.recipeTitle;
@@ -26,9 +35,7 @@ class Recipe extends Component {
           <img className="active-recipe__img" src={imageURL} />
           <h3 className="active-recipe__title">{recipeTitle}</h3>
         <h4 style={{fontWeight:"bold"}}>Ingrediants</h4>
-          {this.state.activeRecipe.map(ingrediant => (
-              <h6 key={ingrediant.name}>{ingrediant.name}</h6>
-          ))}
+       { this.renderRecipeItems()}
           <button style= {{marginBottom:"2rem",marginTop:"2rem"}} className="active-recipe__button"><Link to={"/"}>Go Home</Link> </button>
         </div>
       }

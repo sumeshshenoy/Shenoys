@@ -15,6 +15,7 @@ class App extends Component {
   getRecipe= async(e)=> {
     e.preventDefault();
     const recipeName = e.target.elements[0].value;
+    this.setState({query:recipeName})
     const api_call= await fetch(`https://api.spoonacular.com/recipes/search?apiKey=${API_KEY}&query=${recipeName}&number=10`);
     const data = await api_call.json();
     this.setState({recipes:data.results,
@@ -24,32 +25,30 @@ class App extends Component {
     });
   }
 
-    getRecipebyNavigation=async(nav)=>{
-      var offset=this.state.offset;
-      if(nav==='up')
-      {
-        offset=offset+10
-      }
-      else{
-        offset>10? offset=offset-10:offset=0
-      }
-      const api_call= await fetch(`https://api.spoonacular.com/recipes/search?apiKey=${API_KEY}&query=${this.state.query}&number=10&offset=${offset}`);
-      const data = await api_call.json();
-      this.setState({recipes:data.results,
-        baseURL:data.baseUri,
-        offset:offset,
-      });
-    }
-    
+  getRecipebyNavigation=async(nav)=>{
+    var offset=this.state.offset;
+    if(nav==='up')offset=offset+10
+    else offset>10? offset=offset-10:offset=0
+
+    const api_call= await fetch(`https://api.spoonacular.com/recipes/search?apiKey=${API_KEY}&query=${this.state.query}&number=10&offset=${offset}`);
+    const data = await api_call.json();
+    this.setState({recipes:data.results,
+      baseURL:data.baseUri,
+      offset:offset,
+    });
+  }
   
+
 
   componentDidUpdate=()=>{
     const recipes =JSON.stringify(this.state.recipes);
     localStorage.setItem("recipes",recipes);
     localStorage.setItem("baseUrl",this.state.baseURL);
   }
-
+  
   componentDidMount=()=>{
+    if(localStorage.getItem('recipes'))
+    {
     const json = localStorage.getItem("recipes");
     const baseUri = localStorage.getItem("baseUrl")
     const recipes = JSON.parse(json);
@@ -57,9 +56,9 @@ class App extends Component {
       recipes:recipes,
       baseURL:baseUri,
     })
-
-
-  }
+  
+    }
+  } 
 
 
   render() { 
