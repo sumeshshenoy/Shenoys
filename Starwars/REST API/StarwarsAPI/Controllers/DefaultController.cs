@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StarwarsAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,12 +13,11 @@ namespace StarwarsAPI.Controllers
     public class DefaultController : ApiController
     {
         [Route("getcrawl")]
-        public string GetFilms()
+        public opening_crawl GetLongestCrawl()
 
         {
-            List<string> openCrawl = new List<string>();
+            opening_crawl openingCrawlLongest = new opening_crawl();
             string longest = "";
-            string Film = "";
             using (StarwarsDBContext dbContext = new StarwarsDBContext())
             {
                 var Films = dbContext.films;
@@ -27,19 +27,21 @@ namespace StarwarsAPI.Controllers
                     if (f.opening_crawl.Length > longest.Length)
                     {
                         longest = f.opening_crawl;
-                        Film = f.title;
+                       openingCrawlLongest.openingCrawl = f.title.ToString();
                     }
 
                 }
 
 
-                return Film ;
+
             }
+            return openingCrawlLongest;
         }
         [Route("getchars")]
-        public IEnumerable<string> GetChars()
+        public CharName GetChars()
         {
             List<string> charactersList = new List<string>();
+            CharName character = new CharName();
             using (StarwarsDBContext dbContext = new StarwarsDBContext())
             {
                 List<person> Characters = dbContext.people.ToList();
@@ -48,16 +50,22 @@ namespace StarwarsAPI.Controllers
                     foreach (film f in p.films)
                     {
                         charactersList.Add(p.name);
+                       
                     }
                 }
                 var characters = charactersList.GroupBy(i => i).OrderByDescending(g => g.Count()).Take(1).Select(g => g.Key );
-                return characters;
+                foreach (string charName in characters)
+                {
+                    character.charName = charName;
+                }
+                return character;
             }
         }
 
         [Route("getspecies")]
-        public IEnumerable<string> GetSpecies()
+        public Species GetSpecies()
         {
+            Species species = new Species();
             using (StarwarsDBContext dbContext = new StarwarsDBContext())
             {
                 List<string> listSpecies = new List<string>();
@@ -73,8 +81,9 @@ namespace StarwarsAPI.Controllers
 
                     }
                 }
-                IEnumerable<string> species = listSpecies.GroupBy(i => i).OrderByDescending(g => g.Count()).Take(2).Select(g => string.Format(g.Key + "({0})", g.Count()));
+               species.speciesName= listSpecies.GroupBy(i => i).OrderByDescending(g => g.Count()).Take(2).Select(g => string.Format(g.Key + "({0})", g.Count()));
                 return species;
+   
 
 
             }
