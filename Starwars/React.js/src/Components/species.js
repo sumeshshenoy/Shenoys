@@ -6,35 +6,28 @@ class Species extends Component {
   state = {
     species: []
   };
-  requestSpecies() {
-    fetch("http://localhost:57810/api/default/getspecies")
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ species: data });
-      });
+componentDidMount = async()=>{
+   const response = await  fetch("http://localhost:57810/api/default/getspecies")
+   const data=await response.json();
+   this.setState({species:data.speciesName})
   }
   render() {
-    if (this.props.pressed) {
-      this.requestSpecies();
       return (
         <div className="subPage">
           <h2>
             <b>What species appeared in the most number of Star Wars films?</b>
           </h2>
-          {this.state.species.map(species => (
-            <div>
+          {this.state.species.map(spc => (
+            <div key={spc}>
               <ul>
-                <li key={species} className="ans">
-                  <b>{species}</b>
+                <li  className="ans">
+                  <b> {spc}</b>
                 </li>
               </ul>
             </div>
           ))}
         </div>
       );
-    } else {
-      return <div className="subPage"></div>;
-    }
   }
 }
 

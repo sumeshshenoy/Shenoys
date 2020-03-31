@@ -5,7 +5,6 @@ class Pilots extends Component {
   }
   state = {};
   render() {
-    if (this.props.pressed) {
       return (
         <div className="subPage">
           <h2>
@@ -16,9 +15,6 @@ class Pilots extends Component {
           </h2>
         </div>
       );
-    } else {
-      return <div className="subPage"></div>;
-    }
   }
 }
 

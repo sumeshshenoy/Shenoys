@@ -6,16 +6,13 @@ class Movies extends Component {
   state = {
     movieName: ""
   };
-  requestOpeningCrawl() {
-    fetch("http://localhost:57810/api/default/getcrawl")
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ movieName: data });
-      });
-  }
+componentDidMount=async ()=> {
+     const response= await fetch("http://localhost:57810/api/default/getcrawl");
+     const data = await response.json();
+     this.setState({movieName:data.openingCrawl})
+
+    }
   render() {
-    if (this.props.pressed) {
-      this.requestOpeningCrawl();
       return (
         <div className="subPage">
           <h2>
@@ -26,10 +23,9 @@ class Movies extends Component {
           </h2>
         </div>
       );
-    } else {
-      return <div className="subPage"></div>;
     }
+
+    
   }
-}
 
 export default Movies;

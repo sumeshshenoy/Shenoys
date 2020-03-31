@@ -10,11 +10,10 @@ class MasterPage extends Component {
   };
   styles = {
     padding: 40,
-    width: 500
+    width: 500,
   };
   clickEventHandler() {
     this.setState({ condition: !this.state.condition });
-    console.log(this.state.condition);
   }
   render() {
     return (
@@ -34,10 +33,10 @@ class MasterPage extends Component {
             <span className="glyphicon glyphicon-star"></span>
           </button>
         </div>
-        <Movies pressed={this.state.condition} />
-        <Person pressed={this.state.condition} />
-        <Species pressed={this.state.condition} />
-        <Pilots pressed={this.state.condition} />
+        {this.state.condition && <Movies/>}
+        {this.state.condition && <Person/>}
+        {this.state.condition && <Species/>}
+        {this.state.condition && <Pilots/>}
       </div>
     );
   }

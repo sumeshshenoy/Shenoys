@@ -6,16 +6,12 @@ class Person extends Component {
   state = {
     character: ""
   };
-  requestCharacter() {
-    fetch("http://localhost:57810/api/default/getchars")
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ character: data });
-      });
+componentDidMount=async ()=> {
+  const response = await fetch("http://localhost:57810/api/default/getchars")
+  const data = await response.json();
+  this.setState({character:data.charName})
   }
   render() {
-    if (this.props.pressed) {
-      this.requestCharacter();
       return (
         <div className="subPage">
           <h2>
@@ -28,9 +24,6 @@ class Person extends Component {
           </h2>
         </div>
       );
-    } else {
-      return <div className="subPage"></div>;
-    }
   }
 }
 
